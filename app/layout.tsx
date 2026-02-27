@@ -36,7 +36,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" className="dark">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
         >
           <header className="border-b">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
