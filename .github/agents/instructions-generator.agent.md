@@ -1,5 +1,5 @@
 ---
-name: Instructions Generator
+name: Instructions-Generator
 description: 'This agent generates highly specific agent instrcution files for the docs directory'
 tools: ['edit', 'search', 'fetch']
 ---
