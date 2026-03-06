@@ -55,11 +55,12 @@ The following rules apply globally and override anything else:
 2. **Never** use JavaScript (`.js` / `.jsx`) — all source files must be TypeScript (`.ts` / `.tsx`).
 3. **Never** disable TypeScript strict mode or add `// @ts-ignore` / `// @ts-nocheck` without an explicit comment explaining why.
 4. **Never** install a new dependency without first checking whether the existing stack already covers the need.
-5. **Never** write raw SQL — all database access goes through Drizzle ORM.
-6. **Never** store secrets in source code — use environment variables via `.env` (see `.env` and `drizzle.config.ts` for reference).
-7. **Always** use the `cn()` utility from `@/lib/utils` when composing Tailwind class names conditionally.
-8. **Always** follow the Next.js App Router conventions (server components by default, `"use client"` only when required).
-9. **Always** run `eslint` and fix all lint errors before considering a task complete.
+5. **Never** use `middleware.ts` — it is deprecated in Next.js 16 (the version used in this project). All middleware/proxy logic must go in `proxy.ts` instead.
+6. **Never** write raw SQL — all database access goes through Drizzle ORM.
+7. **Never** store secrets in source code — use environment variables via `.env` (see `.env` and `drizzle.config.ts` for reference).
+8. **Always** use the `cn()` utility from `@/lib/utils` when composing Tailwind class names conditionally.
+9. **Always** follow the Next.js App Router conventions (server components by default, `"use client"` only when required).
+10. **Always** run `eslint` and fix all lint errors before considering a task complete.
 
 ---
 

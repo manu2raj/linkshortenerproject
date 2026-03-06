@@ -1,5 +1,3 @@
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SignInButton, SignUpButton } from '@clerk/nextjs';
@@ -44,13 +42,7 @@ const steps = [
   { step: '3', title: 'Share & Track', description: 'Copy your short link and monitor its performance.' },
 ];
 
-export default async function Home() {
-  const { userId } = await auth();
-
-  if (userId) {
-    redirect('/dashboard');
-  }
-
+export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}

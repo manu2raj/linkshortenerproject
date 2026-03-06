@@ -10,6 +10,7 @@ import {
 } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Button } from "@/components/ui/button";
+import { AuthRedirect } from "@/components/auth-redirect";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -56,6 +57,7 @@ export default function RootLayout({
               </div>
             </div>
           </header>
+          <AuthRedirect />
           <main className="container mx-auto px-4 py-8">
             {children}
           </main>
