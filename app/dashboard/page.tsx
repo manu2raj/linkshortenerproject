@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { CreateLinkDialog } from '@/app/dashboard/create-link-dialog';
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -23,7 +24,10 @@ export default async function DashboardPage() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <Badge variant="secondary">{userLinks.length} link{userLinks.length !== 1 ? 's' : ''}</Badge>
+        <div className="flex items-center gap-3">
+          <Badge variant="secondary">{userLinks.length} link{userLinks.length !== 1 ? 's' : ''}</Badge>
+          <CreateLinkDialog />
+        </div>
       </div>
 
       {userLinks.length === 0 ? (
