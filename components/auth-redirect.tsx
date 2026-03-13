@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useAuth } from '@clerk/nextjs';
-import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useAuth } from "@clerk/nextjs";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export function AuthRedirect() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -10,8 +10,8 @@ export function AuthRedirect() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (isLoaded && isSignedIn && pathname === '/') {
-      router.push('/dashboard');
+    if (isLoaded && isSignedIn && pathname === "/") {
+      router.push("/dashboard");
     }
   }, [isLoaded, isSignedIn, pathname, router]);
 

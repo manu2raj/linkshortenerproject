@@ -60,10 +60,10 @@ Use Next.js middleware (`middleware.ts`) with Clerk's `clerkMiddleware` or `auth
 Example structure:
 
 ```typescript
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)']);
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
+const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)"]);
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware((auth, req) => {
   // Protect dashboard routes
@@ -103,8 +103,8 @@ Set the appearance prop to display these as modals:
   appearance={{
     elements: {
       rootBox: "mx-auto",
-      card: "shadow-lg"
-    }
+      card: "shadow-lg",
+    },
   }}
 />
 ```
@@ -120,8 +120,8 @@ You can also use Next.js parallel routes (`@auth` slot) to render Clerk modals w
 ### Client Components
 
 ```tsx
-'use client';
-import { useUser, useAuth } from '@clerk/nextjs';
+"use client";
+import { useUser, useAuth } from "@clerk/nextjs";
 
 export function ProfileButton() {
   const { isSignedIn, user } = useUser();
@@ -129,24 +129,20 @@ export function ProfileButton() {
 
   if (!isSignedIn) return null;
 
-  return (
-    <button onClick={() => signOut()}>
-      Sign out {user.firstName}
-    </button>
-  );
+  return <button onClick={() => signOut()}>Sign out {user.firstName}</button>;
 }
 ```
 
 ### Server Components
 
 ```tsx
-import { currentUser, auth } from '@clerk/nextjs/server';
+import { currentUser, auth } from "@clerk/nextjs/server";
 
 export default async function DashboardPage() {
   const user = await currentUser();
-  
+
   if (!user) {
-    redirect('/sign-in');
+    redirect("/sign-in");
   }
 
   return <div>Welcome {user.firstName}</div>;
@@ -156,14 +152,14 @@ export default async function DashboardPage() {
 ### Server Actions
 
 ```typescript
-'use server';
-import { auth } from '@clerk/nextjs/server';
+"use server";
+import { auth } from "@clerk/nextjs/server";
 
 export async function createLink(formData: FormData) {
   const { userId } = auth();
-  
+
   if (!userId) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   // Proceed with authenticated action
@@ -177,7 +173,7 @@ export async function createLink(formData: FormData) {
 Use Clerk's pre-built `<UserButton />` component for user menus and profile management:
 
 ```tsx
-import { UserButton } from '@clerk/nextjs';
+import { UserButton } from "@clerk/nextjs";
 
 export function Header() {
   return (
@@ -208,12 +204,12 @@ When storing user-specific data in the database:
 Example Drizzle schema:
 
 ```typescript
-export const links = pgTable('links', {
-  id: text('id').primaryKey(),
-  userId: text('user_id').notNull(), // Clerk user ID
-  url: text('url').notNull(),
-  shortCode: text('short_code').notNull().unique(),
-  createdAt: timestamp('created_at').defaultNow(),
+export const links = pgTable("links", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull(), // Clerk user ID
+  url: text("url").notNull(),
+  shortCode: text("short_code").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 ```
 
@@ -229,7 +225,7 @@ export const links = pgTable('links', {
 ❌ Install NextAuth, Auth0, Passport, or any other auth library  
 ❌ Store authentication tokens in localStorage or cookies manually  
 ❌ Bypass Clerk's middleware for protected routes  
-❌ Render sign-in/sign-up as full-page routes (must be modals)  
+❌ Render sign-in/sign-up as full-page routes (must be modals)
 
 ---
 

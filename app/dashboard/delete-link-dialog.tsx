@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Loader2, Trash2 } from 'lucide-react';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Loader2, Trash2 } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -13,9 +13,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { deleteLink } from '@/app/dashboard/actions';
-import type { Link } from '@/db/schema';
+} from "@/components/ui/dialog";
+import { deleteLink } from "@/app/dashboard/actions";
+import type { Link } from "@/db/schema";
 
 interface DeleteLinkDialogProps {
   link: Link;
@@ -33,9 +33,13 @@ export function DeleteLinkDialog({ link }: DeleteLinkDialogProps) {
 
     const result = await deleteLink({ id: link.id });
 
-    if ('error' in result) {
+    if ("error" in result) {
       const err = result.error;
-      setServerError(typeof err === 'string' ? err : 'Something went wrong. Please try again.');
+      setServerError(
+        typeof err === "string"
+          ? err
+          : "Something went wrong. Please try again.",
+      );
       setIsDeleting(false);
       return;
     }
@@ -63,19 +67,27 @@ export function DeleteLinkDialog({ link }: DeleteLinkDialogProps) {
         <DialogHeader>
           <DialogTitle>Delete short link</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete the link{' '}
-            <span className="font-mono font-semibold">{link.shortCode}</span>? This action cannot
-            be undone.
+            Are you sure you want to delete the link{" "}
+            <span className="font-mono font-semibold">{link.shortCode}</span>?
+            This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
         {serverError && (
           <p className="text-sm font-medium text-destructive">{serverError}</p>
         )}
         <DialogFooter className="gap-2 sm:gap-0">
-          <Button variant="outline" onClick={() => setOpen(false)} disabled={isDeleting}>
+          <Button
+            variant="outline"
+            onClick={() => setOpen(false)}
+            disabled={isDeleting}
+          >
             Cancel
           </Button>
-          <Button variant="destructive" onClick={handleDelete} disabled={isDeleting}>
+          <Button
+            variant="destructive"
+            onClick={handleDelete}
+            disabled={isDeleting}
+          >
             {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Delete
           </Button>

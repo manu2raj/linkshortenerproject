@@ -41,6 +41,7 @@ npx shadcn add <component-name>
 ```
 
 Examples:
+
 ```bash
 npx shadcn add button
 npx shadcn add card
@@ -51,8 +52,8 @@ npx shadcn add dialog
 Components are installed into the `/components/ui` directory and can be imported directly:
 
 ```tsx
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 ```
 
 ---
@@ -98,7 +99,7 @@ export function CustomButton({ children }: { children: React.ReactNode }) {
 
 ```tsx
 // ✅ CORRECT
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export function MyComponent() {
   return <Button>Click me</Button>;
@@ -130,8 +131,15 @@ import { Button } from '@/components/ui/button';
 Build complex UIs by composing shadcn/ui primitives:
 
 ```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export function LinkCard() {
   return (
@@ -156,12 +164,10 @@ export function LinkCard() {
 When you need to add custom Tailwind classes to shadcn components, use the `cn()` utility:
 
 ```tsx
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-<Button className={cn("w-full", isLoading && "opacity-50")}>
-  Submit
-</Button>
+<Button className={cn("w-full", isLoading && "opacity-50")}>Submit</Button>;
 ```
 
 ---
@@ -177,10 +183,17 @@ npx shadcn add label
 ```
 
 ```tsx
-import { useForm } from 'react-hook-form';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export function LinkForm() {
   const form = useForm();
@@ -215,8 +228,15 @@ export function LinkForm() {
 For modals, popups, and overlays, use shadcn/ui Dialog or Sheet components:
 
 ```tsx
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 export function DeleteDialog() {
   return (
@@ -227,9 +247,7 @@ export function DeleteDialog() {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone.
-          </DialogDescription>
+          <DialogDescription>This action cannot be undone.</DialogDescription>
         </DialogHeader>
         <Button variant="destructive">Confirm Delete</Button>
       </DialogContent>
@@ -245,13 +263,13 @@ export function DeleteDialog() {
 Use **Lucide React** for all icons (already configured with shadcn/ui):
 
 ```tsx
-import { Link, Copy, Trash2, BarChart } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Link, Copy, Trash2, BarChart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 <Button>
   <Link className="mr-2 h-4 w-4" />
   Create Link
-</Button>
+</Button>;
 ```
 
 **Never** install or use other icon libraries (FontAwesome, Heroicons, React Icons, etc.).
@@ -267,7 +285,14 @@ npx shadcn add table
 ```
 
 ```tsx
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export function LinksTable() {
   return (
@@ -339,7 +364,7 @@ Use Tailwind's responsive prefixes:
 ❌ Use inline styles (`style={{}}`) instead of Tailwind classes  
 ❌ Install icon libraries other than Lucide React  
 ❌ Copy UI component code from other sources without using shadcn/ui  
-❌ Create custom modal/dialog implementations  
+❌ Create custom modal/dialog implementations
 
 ---
 

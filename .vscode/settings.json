@@ -1,9 +1,9 @@
 {
-    "editor.inlineSuggest.enabled": true,
-"github.copilot.enable": {
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": true,
     "scminput": false
-}
+  }
 }

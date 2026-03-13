@@ -1,6 +1,6 @@
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
-import { getLinksByUserId } from '@/data/links';
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { getLinksByUserId } from "@/data/links";
 import {
   Card,
   CardContent,
@@ -8,17 +8,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { CreateLinkDialog } from '@/app/dashboard/create-link-dialog';
-import { EditLinkDialog } from '@/app/dashboard/edit-link-dialog';
-import { DeleteLinkDialog } from '@/app/dashboard/delete-link-dialog';
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { CreateLinkDialog } from "@/app/dashboard/create-link-dialog";
+import { EditLinkDialog } from "@/app/dashboard/edit-link-dialog";
+import { DeleteLinkDialog } from "@/app/dashboard/delete-link-dialog";
 
 export default async function DashboardPage() {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect('/sign-in');
+    redirect("/sign-in");
   }
 
   const userLinks = await getLinksByUserId(userId);
@@ -28,13 +28,17 @@ export default async function DashboardPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <div className="flex items-center gap-3">
-          <Badge variant="secondary">{userLinks.length} link{userLinks.length !== 1 ? 's' : ''}</Badge>
+          <Badge variant="secondary">
+            {userLinks.length} link{userLinks.length !== 1 ? "s" : ""}
+          </Badge>
           <CreateLinkDialog />
         </div>
       </div>
 
       {userLinks.length === 0 ? (
-        <p className="text-muted-foreground text-sm">You haven&apos;t created any links yet.</p>
+        <p className="text-muted-foreground text-sm">
+          You haven&apos;t created any links yet.
+        </p>
       ) : (
         <div className="flex flex-col gap-4">
           {userLinks.map((link) => (

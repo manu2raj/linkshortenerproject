@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Loader2, Pencil } from 'lucide-react';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Loader2, Pencil } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -24,19 +24,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { editLink } from '@/app/dashboard/actions';
-import type { Link } from '@/db/schema';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { editLink } from "@/app/dashboard/actions";
+import type { Link } from "@/db/schema";
 
 const formSchema = z.object({
-  originalUrl: z.string().url({ message: 'Please enter a valid URL.' }),
+  originalUrl: z.string().url({ message: "Please enter a valid URL." }),
   shortCode: z
     .string()
-    .min(1, { message: 'Short code is required.' })
-    .max(50, { message: 'Short code must be 50 characters or less.' })
+    .min(1, { message: "Short code is required." })
+    .max(50, { message: "Short code must be 50 characters or less." })
     .regex(/^[a-zA-Z0-9_-]+$/, {
-      message: 'Only letters, numbers, hyphens, and underscores are allowed.',
+      message: "Only letters, numbers, hyphens, and underscores are allowed.",
     }),
 });
 
@@ -65,18 +65,18 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
     setServerError(null);
     const result = await editLink({ id: link.id, ...values });
 
-    if ('error' in result) {
+    if ("error" in result) {
       const err = result.error;
       if (!err) return;
-      if (typeof err === 'string') {
+      if (typeof err === "string") {
         setServerError(err);
       } else {
         const fieldErrors = err.fieldErrors;
         if (fieldErrors.originalUrl?.[0]) {
-          form.setError('originalUrl', { message: fieldErrors.originalUrl[0] });
+          form.setError("originalUrl", { message: fieldErrors.originalUrl[0] });
         }
         if (fieldErrors.shortCode?.[0]) {
-          form.setError('shortCode', { message: fieldErrors.shortCode[0] });
+          form.setError("shortCode", { message: fieldErrors.shortCode[0] });
         }
       }
       return;
@@ -110,7 +110,10 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
             <FormField
               control={form.control}
               name="originalUrl"
@@ -118,7 +121,10 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
                 <FormItem>
                   <FormLabel>Destination URL</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://example.com/long-url" {...field} />
+                    <Input
+                      placeholder="https://example.com/long-url"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -138,11 +144,15 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
               )}
             />
             {serverError && (
-              <p className="text-sm font-medium text-destructive">{serverError}</p>
+              <p className="text-sm font-medium text-destructive">
+                {serverError}
+              </p>
             )}
             <DialogFooter>
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {isSubmitting && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
                 Save Changes
               </Button>
             </DialogFooter>

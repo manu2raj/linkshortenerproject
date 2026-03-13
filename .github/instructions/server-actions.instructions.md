@@ -20,6 +20,7 @@ All data mutations in this app must go through **Next.js Server Actions**. Serve
    - ❌ `lib/actions.ts`
 
 4. **No `FormData` type.** All parameters must use explicit TypeScript types or interfaces.
+
    ```ts
    // ✅
    type CreateLinkInput = { url: string; slug: string };
@@ -30,6 +31,7 @@ All data mutations in this app must go through **Next.js Server Actions**. Serve
    ```
 
 5. **Validate all input with Zod** before any processing.
+
    ```ts
    const schema = z.object({ url: z.string().url(), slug: z.string().min(1) });
    const parsed = schema.safeParse(input);
@@ -37,12 +39,14 @@ All data mutations in this app must go through **Next.js Server Actions**. Serve
    ```
 
 6. **Check for a logged-in user first** (via Clerk) before any database operations.
+
    ```ts
    const { userId } = await auth();
    if (!userId) return { error: "Unauthorized" };
    ```
 
-8. **Never throw errors.** Always return an object with an `error` or `success` property instead.
+7. **Never throw errors.** Always return an object with an `error` or `success` property instead.
+
    ```ts
    // ✅
    return { success: true, data: result };
@@ -52,7 +56,8 @@ All data mutations in this app must go through **Next.js Server Actions**. Serve
    throw new Error("Something went wrong.");
    ```
 
-7. **No raw Drizzle queries in server actions.** Use helper functions from the `/data` directory instead.
+8. **No raw Drizzle queries in server actions.** Use helper functions from the `/data` directory instead.
+
    ```ts
    // ✅
    import { createLinkRecord } from "@/data/links";

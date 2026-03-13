@@ -1,17 +1,21 @@
-'use server';
+"use server";
 
-import { z } from 'zod';
-import { auth } from '@clerk/nextjs/server';
-import { createLinkRecord, updateLinkRecord, deleteLinkRecord } from '@/data/links';
+import { z } from "zod";
+import { auth } from "@clerk/nextjs/server";
+import {
+  createLinkRecord,
+  updateLinkRecord,
+  deleteLinkRecord,
+} from "@/data/links";
 
 const createLinkSchema = z.object({
-  originalUrl: z.string().url({ message: 'Please enter a valid URL.' }),
+  originalUrl: z.string().url({ message: "Please enter a valid URL." }),
   shortCode: z
     .string()
-    .min(1, { message: 'Short code is required.' })
-    .max(50, { message: 'Short code must be 50 characters or less.' })
+    .min(1, { message: "Short code is required." })
+    .max(50, { message: "Short code must be 50 characters or less." })
     .regex(/^[a-zA-Z0-9_-]+$/, {
-      message: 'Only letters, numbers, hyphens, and underscores are allowed.',
+      message: "Only letters, numbers, hyphens, and underscores are allowed.",
     }),
 });
 
@@ -25,7 +29,7 @@ export async function createLink(input: CreateLinkInput) {
 
   const { userId } = await auth();
   if (!userId) {
-    return { error: 'Unauthorized' };
+    return { error: "Unauthorized" };
   }
 
   try {
@@ -37,22 +41,22 @@ export async function createLink(input: CreateLinkInput) {
     return { success: true, data: link };
   } catch (err) {
     const message =
-      err instanceof Error && err.message.includes('unique')
-        ? 'That short code is already taken. Please choose another.'
-        : 'Something went wrong. Please try again.';
+      err instanceof Error && err.message.includes("unique")
+        ? "That short code is already taken. Please choose another."
+        : "Something went wrong. Please try again.";
     return { error: message };
   }
 }
 
 const editLinkSchema = z.object({
   id: z.number().int().positive(),
-  originalUrl: z.string().url({ message: 'Please enter a valid URL.' }),
+  originalUrl: z.string().url({ message: "Please enter a valid URL." }),
   shortCode: z
     .string()
-    .min(1, { message: 'Short code is required.' })
-    .max(50, { message: 'Short code must be 50 characters or less.' })
+    .min(1, { message: "Short code is required." })
+    .max(50, { message: "Short code must be 50 characters or less." })
     .regex(/^[a-zA-Z0-9_-]+$/, {
-      message: 'Only letters, numbers, hyphens, and underscores are allowed.',
+      message: "Only letters, numbers, hyphens, and underscores are allowed.",
     }),
 });
 
@@ -66,7 +70,7 @@ export async function editLink(input: EditLinkInput) {
 
   const { userId } = await auth();
   if (!userId) {
-    return { error: 'Unauthorized' };
+    return { error: "Unauthorized" };
   }
 
   try {
@@ -75,14 +79,14 @@ export async function editLink(input: EditLinkInput) {
       shortCode: parsed.data.shortCode,
     });
     if (!link) {
-      return { error: 'Link not found.' };
+      return { error: "Link not found." };
     }
     return { success: true, data: link };
   } catch (err) {
     const message =
-      err instanceof Error && err.message.includes('unique')
-        ? 'That short code is already taken. Please choose another.'
-        : 'Something went wrong. Please try again.';
+      err instanceof Error && err.message.includes("unique")
+        ? "That short code is already taken. Please choose another."
+        : "Something went wrong. Please try again.";
     return { error: message };
   }
 }
@@ -101,16 +105,16 @@ export async function deleteLink(input: DeleteLinkInput) {
 
   const { userId } = await auth();
   if (!userId) {
-    return { error: 'Unauthorized' };
+    return { error: "Unauthorized" };
   }
 
   try {
     const deleted = await deleteLinkRecord(parsed.data.id, userId);
     if (!deleted) {
-      return { error: 'Link not found.' };
+      return { error: "Link not found." };
     }
     return { success: true };
   } catch {
-    return { error: 'Something went wrong. Please try again.' };
+    return { error: "Something went wrong. Please try again." };
   }
 }

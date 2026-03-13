@@ -3,7 +3,6 @@
 This file is the **entry point** for all LLM coding agents working in this repository.  
 All agents **must** read this file before generating, modifying, or reviewing any code.
 
-
 ---
 
 ## Project Overview
@@ -43,9 +42,9 @@ The following rules apply globally and override anything else:
 4. **Never** use `middleware.ts` — it is deprecated in Next.js 16 (the version used in this project). All middleware/proxy logic must go in `proxy.ts` instead.
 5. **Never** write raw SQL — all database access goes through Drizzle ORM.
 6. **Never** store secrets in source code — use environment variables via `.env` (see `.env` and `drizzle.config.ts` for reference).
-8. **Always** use the `cn()` utility from `@/lib/utils` when composing Tailwind class names conditionally.
-9. **Always** follow the Next.js App Router conventions (server components by default, `"use client"` only when required).
-10. **Always** run `eslint` and fix all lint errors before considering a task complete.
+7. **Always** use the `cn()` utility from `@/lib/utils` when composing Tailwind class names conditionally.
+8. **Always** follow the Next.js App Router conventions (server components by default, `"use client"` only when required).
+9. **Always** run `eslint` and fix all lint errors before considering a task complete.
 
 ---
 
@@ -75,13 +74,13 @@ npx shadcn add <component-name>
 
 ## Environment Variables
 
-| Variable | Description |
-|---|---|
-| `DATABASE_URL` | Neon PostgreSQL connection string |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key |
-| `CLERK_SECRET_KEY` | Clerk secret key |
-| `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | Clerk sign-in redirect path |
-| `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | Clerk sign-up redirect path |
+| Variable                            | Description                       |
+| ----------------------------------- | --------------------------------- |
+| `DATABASE_URL`                      | Neon PostgreSQL connection string |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key             |
+| `CLERK_SECRET_KEY`                  | Clerk secret key                  |
+| `NEXT_PUBLIC_CLERK_SIGN_IN_URL`     | Clerk sign-in redirect path       |
+| `NEXT_PUBLIC_CLERK_SIGN_UP_URL`     | Clerk sign-up redirect path       |
 
 All variables must be present in `.env` locally and in the deployment environment.  
 Never commit `.env` to version control — it is listed in `.gitignore`.
