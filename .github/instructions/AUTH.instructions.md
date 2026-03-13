@@ -1,3 +1,7 @@
+---
+description: Read this file before performing any task related to authentication, user management, or protected routes.
+---
+
 # AUTH.md — Authentication Instructions
 
 This document defines **all** authentication rules and patterns for this project.
