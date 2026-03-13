@@ -37,3 +37,12 @@ export async function deleteLinkRecord(id: number, userId: string): Promise<bool
     .returning({ id: links.id });
   return result.length > 0;
 }
+
+export async function getLinkByShortCode(shortCode: string): Promise<Link | null> {
+  const [link] = await db
+    .select()
+    .from(links)
+    .where(eq(links.shortCode, shortCode))
+    .limit(1);
+  return link ?? null;
+}
