@@ -5,11 +5,14 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CreateLinkDialog } from '@/app/dashboard/create-link-dialog';
+import { EditLinkDialog } from '@/app/dashboard/edit-link-dialog';
+import { DeleteLinkDialog } from '@/app/dashboard/delete-link-dialog';
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -52,6 +55,10 @@ export default async function DashboardPage() {
                   {link.originalUrl}
                 </a>
               </CardContent>
+              <CardFooter className="flex gap-2 justify-end">
+                <EditLinkDialog link={link} />
+                <DeleteLinkDialog link={link} />
+              </CardFooter>
             </Card>
           ))}
         </div>
