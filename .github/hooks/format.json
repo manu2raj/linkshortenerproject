@@ -2,9 +2,9 @@
   "version": 1,
   "hooks": {
     "postToolUse": [
-      {
+     {
         "type": "command",
-        "command": "npx prettier --write ."
+        "command": "$input | powershell -NoProfile -File .github/hooks/format.ps1"
       }
     ]
   }
