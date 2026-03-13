@@ -1,3 +1,7 @@
+---
+description: Read this file before creating any UI components or writing any code related to the user interface.
+---
+
 # UI.md — User Interface Instructions
 
 This document defines **all** UI component rules and patterns for this project.
